@@ -25,7 +25,7 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 # Set OpenAI API key from Streamlit secrets
 # client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-openai.api_key = st.secrets["openai_apikey"]
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 #st.image('images/ask_me_chatbot.png')
 
