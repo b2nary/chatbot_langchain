@@ -41,7 +41,7 @@ def generate_response(message):
         )
     qa_chain = RetrievalQA.from_chain_type(
         llm,
-        retriever=vectordb.as_retriever(search_kwargs={"k":3}),
+        retriever=vectordb.as_retriever(search_kwargs={"k":2}),
         chain_type="stuff"
         #chain_type_kwargs={"prompt": prompt}
     )
