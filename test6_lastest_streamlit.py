@@ -14,6 +14,7 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_openai import ChatOpenAI
 from langchain.chains import RetrievalQA
+import pysqlite3
 
 ###### sqlite 버전이슈로 아래 3 줄 추가함 ######
 __import__('pysqlite3')
