@@ -15,6 +15,7 @@ from langchain_community.vectorstores import Chroma
 from langchain_openai import ChatOpenAI
 from langchain.chains import RetrievalQA
 import pysqlite3
+from glob import glob
 
 ###### sqlite 버전이슈로 아래 3 줄 추가함. 이 코드 3줄은 streamlit에 올릴 때만 적용할 것 ######
 __import__('pysqlite3')
@@ -30,8 +31,20 @@ openai.api_key = st.secrets["OPENAI_API_KEY"]
 #st.image('images/ask_me_chatbot.png')
 
 def generate_response(message):
-    loader = DirectoryLoader('./', glob="*.txt")
-    documents = loader.load()
+    #loader = DirectoryLoader('./', glob="*.txt")
+    #documents = loader.load()
+
+    # 폴더 내의 모든 txt 파일 경로 가져오기 > DirectoryLoader 를 사용하지 않으면 unstructured를 사용하지 않아도 됨
+    txt_files = glob('./data/*.txt')
+
+    # 파일 경로를 documents 리스트에 저장
+    documents = []
+
+    # 각 파일의 내용을 읽어서 리스트에 저장
+    for file_path in txt_files:
+        with open(file_path, 'r') as file:
+            documents.append(file.read())
+    
     text_splitter = RecursiveCharacterTextSplitter(chunk_size = 2500, chunk_overlap = 200)
     texts = text_splitter.split_documents(documents)
     vectordb = Chroma.from_documents(documents=texts, embedding=OpenAIEmbeddings())
