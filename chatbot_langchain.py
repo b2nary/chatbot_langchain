@@ -21,6 +21,7 @@ from langchain_community.vectorstores import Chroma
 from langchain.chains import RetrievalQA
 import streamlit as st
 from streamlit_chat import message
+import openai
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
