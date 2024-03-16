@@ -22,7 +22,7 @@ from langchain.chains import RetrievalQA
 import streamlit as st
 from streamlit_chat import message
 
-os.environ["OPENAI_API_KEY"] = "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"
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 def generate_response(message):
     # ChatGPT 모델 초기화
